@@ -14,10 +14,12 @@
                     @if ($post->file)
                 <img src="{{ $post->file}}" class="img-responsive">
                     @endif
-                    {{$post->ex}}
+                    {{$post->excerpt}}
+                    <a href="{{ route('posts', $post->slug) }}" class="pull-rigth">Leer mas</a>
                 </div>
             </div>
         @endforeach
+        {{ $posts->render() }}
     </div>
 </div>
 @endsection
