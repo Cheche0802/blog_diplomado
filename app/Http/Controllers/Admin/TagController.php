@@ -14,7 +14,6 @@ class TagController extends Controller
     {
         $this->middleware('auth');
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -73,7 +72,7 @@ class TagController extends Controller
     {
         $tag = Tag::find($id);
 
-        return view ('admin.tags.edit', compact('tag'));
+        return view('admin.tags.edit', compact('tag'));
     }
 
     /**
