@@ -62,9 +62,6 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-                            <li><a href="{{route('tags.index')}}">Etiquetas</a></li>
-                            <li><a href="{{route('categories.index')}}">Categorias</a></li>
-                            <li><a href="{{route('posts.index')}}">Entradas</a></li>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -84,8 +81,39 @@
         </nav>
 
         <main class="py-4">
+            @if (session('info'))
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="alert alert-success">
+                                {{session('info')}}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            @if (count($errors))
+            <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $$error)
+                                <li>{{ $error}}</li>
+
+                                    @endforeach
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            @endif
             @yield('content')
         </main>
     </div>
+    @yield('scripts')
 </body>
 </html>

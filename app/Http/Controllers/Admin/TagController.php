@@ -43,10 +43,15 @@ class TagController extends Controller
      */
     public function store(TagStoreRequest $request)
     {
-        $tag = Tag::create($request->all());
+        // dd($request->all());
+        $tags= new Tag();
+        $tags->name=$request->name;
+        $tags->slug=$request->slug;
+        $tags->save();
+        // $tags = Tag::create($request->all());
 
-        return redirect()->route('tags.index', $tag->id)
-            ->with('info', 'Etiqueta Creada con Exito');
+        return redirect()->route('tags.index', $tags->id)
+        ->with('info', 'Etiqueta Creada con Exito');
     }
 
     /**
@@ -57,7 +62,7 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        $tag = Tag::find($id);
+        $tag = Tag::findOrFail($id);
 
         return view ('admin.tags.show', compact('tag'));
     }
@@ -70,9 +75,8 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        $tag = Tag::find($id);
-
-        return view('admin.tags.edit', compact('tag'));
+        $tags = Tag::find($id);
+        return view ('admin.tags.edit', compact('tags'));
     }
 
     /**
@@ -84,11 +88,13 @@ class TagController extends Controller
      */
     public function update(TagUpdateRequest $request, $id)
     {
-        $tag = Tag::find($id);
+        $tags = Tag::find($id);
 
-        $tag->fill($request->all())->save() ;
+        $tags->name=$request->name;
+        $tags->slug=$request->slug;
+        $tags->save();
 
-        return redirect()->route('tags.index', $tag->id)
+        return redirect()->route('tags.index', $tags->id)
         ->with('info', 'Etiqueta Actualizada con Exito');
     }
 
