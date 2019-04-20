@@ -44,11 +44,8 @@ class TagController extends Controller
     public function store(TagStoreRequest $request)
     {
         // dd($request->all());
-        $tags= new Tag();
-        $tags->name=$request->name;
-        $tags->slug=$request->slug;
-        $tags->save();
-        // $tags = Tag::create($request->all());
+
+         $tags = Tag::create($request->all());
 
         return redirect()->route('tags.index', $tags->id)
         ->with('info', 'Etiqueta Creada con Exito');
@@ -90,9 +87,7 @@ class TagController extends Controller
     {
         $tags = Tag::find($id);
 
-        $tags->name=$request->name;
-        $tags->slug=$request->slug;
-        $tags->save();
+        $tags->fill($request->all())->save();
 
         return redirect()->route('tags.index', $tags->id)
         ->with('info', 'Etiqueta Actualizada con Exito');
