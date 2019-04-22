@@ -15,9 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -100,9 +98,8 @@
                         <div class="col-md-8 col-md-offset-2">
                             <div class="alert alert-danger">
                                 <ul>
-                                    @foreach ($errors->all() as $$error)
-                                <li>{{ $error}}</li>
-
+                                    @foreach ($errors->all() as $error)
+                                         <li>{{ $error}}</li>
                                     @endforeach
                                 </ul>
                             </div>
