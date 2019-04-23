@@ -25,6 +25,7 @@ class PostUpdateRequest extends FormRequest
     {
         $rules = [
             'name'          => 'required',
+            'slug'          => 'required|unique:posts,slug,' . $this->post,
             'user_id'       => 'required|integer',
             'category_id'   => 'required|integer',
             'tags'          => 'required|array',
@@ -32,7 +33,7 @@ class PostUpdateRequest extends FormRequest
             'status'        => 'required|in:DRAFT,PUBLISHED',
         ];
 
-        if($this->get('image'))
+        if($this->get('image'))        
             $rules = array_merge($rules, ['image'         => 'mimes:jpg,jpeg,png']);
 
         return $rules;

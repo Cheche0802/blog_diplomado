@@ -5,15 +5,23 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
+
 use App\Http\Controllers\Controller;
+
 use App\Category;
 
 class CategoryController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
+    
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +29,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('id' , 'DESC')->paginate();
+        $categories = Category::orderBy('id', 'DESC')->paginate();
+
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -43,12 +52,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreRequest $request)
     {
-        // dd($request->all());
+        $category = Category::create($request->all());
 
-         $categories = Category::create($request->all());
-
-        return redirect()->route('categories.index', $categories->id)
-        ->with('info', 'Categoría Creada con Exito');
+        return redirect()->route('categories.edit', $category->id)->with('info', 'Categoría creada con éxito');
     }
 
     /**
@@ -59,9 +65,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::find($id);
 
-        return view ('admin.categories.show', compact('category'));
+        return view('admin.categories.show', compact('category'));
     }
 
     /**
@@ -72,8 +78,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $categories = Category::find($id);
-        return view ('admin.categories.edit', compact('categories'));
+        $category = Category::find($id);
+
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -85,13 +92,11 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdateRequest $request, $id)
     {
-        $categories = Category::find($id);
+        $category = Category::find($id);
 
-        $categories->fill($request->all())->save();
+        $category->fill($request->all())->save();
 
-
-        return redirect()->route('categories.index', $categories->id)
-        ->with('info', 'Categoría Actualizada con Exito');
+        return redirect()->route('categories.edit', $category->id)->with('info', 'Categoría actualizada con éxito');
     }
 
     /**
@@ -102,8 +107,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::find($id)->delete();
+        $category = Category::find($id)->delete();
 
-        return back()->with('info', 'Etiqueta eliminada con exito');
+        return back()->with('info', 'Eliminado correctamente');
     }
 }

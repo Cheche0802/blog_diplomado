@@ -6,13 +6,13 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Ver Categoría
+                    Ver entrada
                 </div>
 
                 <div class="panel-body">
                     <p><strong>Nombre</strong> {{ $post->name }}</p>
-                    <p><strong>Url</strong> {{  $post->slug }}</p>
-                    <p><strong>Contenido</strong> {{  $post->body }}</p>
+                    <p><strong>Slug</strong> {{ $post->slug }}</p>
+                    <p><strong>Descripción</strong> {{ $post->body }}</p>
                 </div>
             </div>
         </div>

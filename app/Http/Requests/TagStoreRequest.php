@@ -25,7 +25,7 @@ class TagStoreRequest extends FormRequest
     {
         return [
             'name' => 'required',
-  
+            'slug' => 'required|unique:tags,slug',
         ];
     }
 }

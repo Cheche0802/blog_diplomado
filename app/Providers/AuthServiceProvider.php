@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+
 use App\Post;
 use App\Policies\PostPolicy;
 
@@ -15,8 +16,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-
-         Post::class => PostPolicy::class
+        'App\Model' => 'App\Policies\ModelPolicy',
+        Post::class => PostPolicy::class
     ];
 
     /**

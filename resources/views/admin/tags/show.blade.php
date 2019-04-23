@@ -11,7 +11,7 @@
 
                 <div class="panel-body">
                     <p><strong>Nombre</strong> {{ $tag->name }}</p>
-                    <p><strong>Slug</strong> {{  $tag->slug }}</p>
+                    <p><strong>Slug</strong> {{ $tag->slug }}</p>
                 </div>
             </div>
         </div>

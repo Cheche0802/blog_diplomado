@@ -1,11 +1,24 @@
 <div class="form-group">
-    <label for="name">Nombre</label>
-<input type="text" name="name" id="name" placeholder="Nombre" class="form-control">
+    {{ Form::label('name', 'Nombre de la etiqueta') }}
+    {{ Form::text('name', null, ['class' => 'form-control', 'id' => 'name']) }}
 </div>
 <div class="form-group">
-    <label for="slug">Url amigable</label>
-    <input type="text" name="slug" id="slug"  placeholder="url-amigable" class="form-control" readonly>{{ old('slug') }}
+    {{ Form::label('slug', 'URL amigable') }}
+    {{ Form::text('slug', null, ['class' => 'form-control', 'id' => 'slug']) }}
+</div>
+<div class="form-group">
+    {{ Form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}
 </div>
 
-
-<input type="submit" value="Guardar" class="btn btn-success">
+@section('scripts')
+<script src="{{ asset('vendor/stringToSlug/jquery.stringToSlug.min.js') }}"></script>
+<script>
+	$(document).ready(function(){
+	    $("#name, #slug").stringToSlug({
+	        callback: function(text){
+	            $('#slug').val(text);
+	        }
+	    });
+	});
+</script>
+@endsection
